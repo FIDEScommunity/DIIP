@@ -1,0 +1,43 @@
+{
+  "@context": "https://w3id.org/did-resolution/v1",
+  "didDocument": {
+    "id": "did:ion:EiDC8qe_kwtm02IVoVZ8epcGi90XnL1NYI6baJIwHVBgrg",
+    "@context": [
+      "https://www.w3.org/ns/did/v1",
+      {
+        "@base": "did:ion:EiDC8qe_kwtm02IVoVZ8epcGi90XnL1NYI6baJIwHVBgrg"
+      }
+    ],
+    "service": [
+      {
+        "id": "#domain-1",
+        "type": "LinkedDomains",
+        "serviceEndpoint": "https://erickuhn19.com"
+      }
+    ],
+    "verificationMethod": [
+      {
+        "id": "#key-1",
+        "controller": "",
+        "type": "EcdsaSecp256k1VerificationKey2019",
+        "publicKeyJwk": {
+          "kty": "EC",
+          "crv": "secp256k1",
+          "x": "0DByK_buTNM5ljoJeFDMIoqEaCv92e25H6qj_36zYbs",
+          "y": "dY6MXrr70VZ_1VfHuBELDGzPk8Nxbpv1B76f6NnpVF8"
+        }
+      }
+    ],
+    "authentication": [
+      "#key-1"
+    ]
+  },
+  "didDocumentMetadata": {
+    "method": {
+      "published": true,
+      "recoveryCommitment": "EiDRUgxeC0hdpch7zehFkH5_TmVLmbXWJ0O0faw5Inj_Dg",
+      "updateCommitment": "EiBnjYiBQ-gXaVRH_IoAp25QrcR_EeEf2pXTDHuV33_Vgg"
+    },
+    "canonicalId": "did:ion:EiDC8qe_kwtm02IVoVZ8epcGi90XnL1NYI6baJIwHVBgrg"
+  }
+}

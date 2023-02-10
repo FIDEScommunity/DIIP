@@ -1,0 +1,21 @@
+{
+  "authorization_endpoint": "openid-vc:",
+  "issuer": "https://self-issued.me/v2/openid-vc",
+  "response_types_supported": [
+    "id_token"
+  ],
+  "scopes_supported": [
+    "openid"
+  ],
+  "subject_types_supported": [
+    "pairwise"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "ES256K",
+    "EdDSA"
+  ],
+  "request_object_signing_alg_values_supported": [
+    "ES256K",
+    "EdDSA"
+  ]
+}
