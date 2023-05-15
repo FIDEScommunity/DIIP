@@ -125,6 +125,32 @@ This section consolidates in one place common terms used across open standards t
 
 ## Profile
 
+## Issuance
+TODO: For issuance of Verifiable Credentials...
+
+
+## Presentation
+The presentation from the Wallet to the Verifier is done using the [[ref: OpenID4VP]] and [[ref: Presentation Exchange v1.0.0]] specifications. Actually for DDIP we follow the [[ref: JWT VC Presentation Profile]], with the below changes
+
+### DID Methods
+Implementers are required to support DID:WEB and DID:JWK. It does not have mandatory support for DID:ION, unlike the [[ref: JWT VC Presentation Profile]] which we use as a basis for the Presentation.
+
+#### DID Web Method
+Support for [[ref: DID WEB Method]] as mentioned in the [[ref: JWT VC Presentation Profile]] is required.
+
+#### No Blockchain and thus no DID ION Method
+Since we didn't want to include a blockchain based DID method in Version one of DDIP, we do not require [[ref: DID ION method]] support in DDIP, contrary to the [[ref: JWT VC Presentation Profile]]. Of course implementations are free to support the [[ref: DID ION Method]]. One of the drawbacks of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger based DID methods anyway.
+
+#### Addition of DID JWK Method
+We do support the [[ref: DID JWK Method]], given this DID method is simply an encoding of a Json Web Key. As such it also supports X509 certificates. This is a very common way to encode keys and certificates in current solutions and thus we believe it is important to support this method. A DID JWK can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u). 
+
+#### DID Key Method
+TODO: EBSI now is using JCS with DID:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would loose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates.
+
+
+### Linked Domain Verification is fully optional
+Contrary to the [[ref: JWT VC Presentation Profile]], the use of [[ref: Linked Domain Verification]] is fully optional. If not present for a party, the other party should not raise an error. Although we believe Linked Domains are a nice optional trust anchor, we also wanted to keep the DDIP v1 profile as Simple as possible at this point in time. Focusing on technical interoperability first and governance interoperability later.
+
 
 ## Security Considerations
 
@@ -158,6 +184,9 @@ Examples are listed inline in above sections as well as in complete form within 
 
 [[def: VC Data Model v1.1]]
 ~ [Verifiable Credentials Data Model v1.1](https://www.w3.org/TR/vc-data-model/). Manu Sporny, Dave Longley, David Chadwick. 2021.08. Status: W3C Proposed Recommendation.
+
+[[def: JWT VC Presentation profile]]
+~ [JWT VC Presentation Profile](https://identity.foundation/jwt-vc-presentation-profile/), Daniel McGrogan, Kristina Yasuda, Jen Schreiber
 
 [[def: Presentation Exchange v1.0.0]]
 ~ [Presentation Exchange v1.0.0](https://identity.foundation/presentation-exchange/spec/v1.0.0/). Daniel Buchner, Brent Zundel, Martin Riedel.
