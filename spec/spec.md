@@ -194,14 +194,8 @@ Examples are listed inline in above sections as well as in complete form within 
 [[def: did-web]]
 ~ [Web DID Method](https://github.com/w3c-ccg/did-method-web). Oliver Terbu, Mike Xu, Dmitri Zagidulin, Amy Guy. Status: Registered in DID Specification Registry.
 
-[[def: OIDC Registration]]
-~ [OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1](https://openid.net/specs/openid-connect-registration-1_0.html). Nat Sakimura, John Bradley, Michael B. Jones. 2014.11. Status: Approved Specification.
-
-[[def: Well Known DID]]
-~ [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/). Daniel Buchner, Orie Steele, Tobias Looker. 2021.01. Status: DIF Working Group Approved Draft.
-
-[[def: Status List 2021 (0.0.1 Predraft)]]
-~ [Status List 2021 0.0.1 Predraft](https://github.com/w3c/vc-status-list-2021/releases/tag/v0.0.1). Manu Sporny, Dave Longley, Orie Steele, Mike Prorock, Mahmoud Alkhraishi. 2022.04. Status: Draft Community Group Report.
+[[def: Status List 2021 (First public draft)]]
+~ [Status List 2021 0.0.1 Predraft](https://www.w3.org/TR/vc-status-list/). Manu Sporny, Dave Longley, Orie Steele, Mike Prorock, Mahmoud Alkhraishi. 2022.04. Status: Draft Community Group Report.
 
 ### Non-Normative References
 
@@ -213,3 +207,9 @@ Examples are listed inline in above sections as well as in complete form within 
 
 [[def: SD-JWT]]
 ~ [Selective Disclosure for JWTs (SD-JWT)](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt). Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG
+
+[[def: OIDC Registration]]
+~ [OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1](https://openid.net/specs/openid-connect-registration-1_0.html). Nat Sakimura, John Bradley, Michael B. Jones. 2014.11. Status: Approved Specification.
+
+[[def: Well Known DID]]
+~ [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/). Daniel Buchner, Orie Steele, Tobias Looker. 2021.01. Status: DIF Working Group Approved Draft.
