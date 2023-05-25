@@ -1,7 +1,9 @@
 # Decentralized Dutch Identity Profile (DDIP)
 
-The lastest draft can be found at:
-[TODO]
+**Latest Draft:**
+The latest draft can be found at:
+[https://dutchblockchaincoalition.github.io/DDIP](https://dutchblockchaincoalition.github.io/DDIP)
+
 
 ## Contributing
 

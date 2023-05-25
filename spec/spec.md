@@ -4,7 +4,7 @@ Dutch Decentralized Identity Profile
 **Profile Status:** Draft
 
 **Latest Draft:**
-[https://dutchblockchaincoalition.github.com/DDIP](https://dutchblockchaincoalition.github.com/DDIP)
+[https://dutchblockchaincoalition.github.io/DDIP](https://dutchblockchaincoalition.github.io/DDIP)
 
 Editors:
 ~ [Niels Klomp](https://www.linkedin.com/in/niels-klomp/) (Sphereon)
@@ -194,20 +194,11 @@ Examples are listed inline in above sections as well as in complete form within 
 [[def: did-web]]
 ~ [Web DID Method](https://github.com/w3c-ccg/did-method-web). Oliver Terbu, Mike Xu, Dmitri Zagidulin, Amy Guy. Status: Registered in DID Specification Registry.
 
-[[def: did-ion]]
-~ [ION DID Method](https://github.com/decentralized-identity/ion-did-method). Various DIF contributors. Status: Registered in DID Specification Registry.
-
 [[def: OIDC Registration]]
 ~ [OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1](https://openid.net/specs/openid-connect-registration-1_0.html). Nat Sakimura, John Bradley, Michael B. Jones. 2014.11. Status: Approved Specification.
 
-[[def: Sidetree]]
-~ [Sidetree v1.0.0](https://identity.foundation/sidetree/spec/). Daniel Buchner, Orie Steele, Troy Ronda. 2021.03. Status: DIF Ratified Specification.
-
 [[def: Well Known DID]]
 ~ [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/). Daniel Buchner, Orie Steele, Tobias Looker. 2021.01. Status: DIF Working Group Approved Draft.
-
-[[def: Identity Hub (0.0.1 Predraft)]]
-~ [Identity Hub - Decentralized Web Node 0.0.1 Predraft](https://identity.foundation/decentralized-web-node/spec/0.0.1-predraft/)
 
 [[def: Status List 2021 (0.0.1 Predraft)]]
 ~ [Status List 2021 0.0.1 Predraft](https://github.com/w3c/vc-status-list-2021/releases/tag/v0.0.1). Manu Sporny, Dave Longley, Orie Steele, Mike Prorock, Mahmoud Alkhraishi. 2022.04. Status: Draft Community Group Report.
@@ -219,9 +210,6 @@ Examples are listed inline in above sections as well as in complete form within 
 
 [[def: JPA]]
 ~ [JSON Proof Algorithms](https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-proof-algorithms.md). Jeremie Miller, Michael B. Jones. Status: Internet-Draft.
-
-[[def: Decentralized Web Node]]
-~ [Decentralized Web Node](https://identity.foundation/decentralized-web-node/spec/). Daniel Buchner, Tobias Looker. Status: Draft.
 
 [[def: SD-JWT]]
 ~ [Selective Disclosure for JWTs (SD-JWT)](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt). Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG

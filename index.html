@@ -50,7 +50,7 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                       <h1 id="dutch-decentralized-identity-profile"><a class="toc-anchor" href="#dutch-decentralized-identity-profile" >§</a> Dutch Decentralized Identity Profile</h1>
 <p><strong>Profile Status:</strong> Draft</p>
 <p><strong>Latest Draft:</strong>
-<a path-0="dutchblockchaincoalition.github.com"path-1="DDIP"href="https://dutchblockchaincoalition.github.com/DDIP" >https://dutchblockchaincoalition.github.com/DDIP</a></p>
+<a path-0="dutchblockchaincoalition.github.io"path-1="DDIP"href="https://dutchblockchaincoalition.github.io/DDIP" >https://dutchblockchaincoalition.github.io/DDIP</a></p>
 <dl>
 <dt>Editors:</dt>
 <dd><a path-0="www.linkedin.com"path-1="in"path-2="niels-klomp"path-3=""href="https://www.linkedin.com/in/niels-klomp/" >Niels Klomp</a> (Sphereon)</dd>
@@ -136,6 +136,22 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <dd>An entity that receives, stores, presents, and manages credentials and key material of the End User. During presentation of VP(s) using <a class="term-reference" href="#term:openid4vp">OpenID4VP</a>, the Wallet acts as an OAuth 2.0 Authorization Server towards the Verifier that is acting as an OAuth 2.0 Client. During user authentication using <a class="term-reference" href="#term:siopv2">SIOPv2</a>, the Wallet acts as a Self Issued OpenID Provider towards the Verifier that is a specific case of the Relying Party in <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a>.</dd>
 </dl>
 <h2 id="profile"><a class="toc-anchor" href="#profile" >§</a> Profile</h2>
+<h2 id="issuance"><a class="toc-anchor" href="#issuance" >§</a> Issuance</h2>
+<p>TODO: For issuance of Verifiable Credentials…</p>
+<h2 id="presentation"><a class="toc-anchor" href="#presentation" >§</a> Presentation</h2>
+<p>The presentation from the Wallet to the Verifier is done using the <a class="term-reference" href="#term:openid4vp">OpenID4VP</a> and <a class="term-reference" href="#term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</a> specifications. Actually for DDIP we follow the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>, with the below changes</p>
+<h3 id="did-methods"><a class="toc-anchor" href="#did-methods" >§</a> DID Methods</h3>
+<p>Implementers are required to support DID:WEB and DID:JWK. It does not have mandatory support for DID:ION, unlike the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a> which we use as a basis for the Presentation.</p>
+<h4 id="did-web-method"><a class="toc-anchor" href="#did-web-method" >§</a> DID Web Method</h4>
+<p>Support for <a class="term-reference" href="#term:did-web-method">DID WEB Method</a> as mentioned in the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a> is required.</p>
+<h4 id="no-blockchain-and-thus-no-did-ion-method"><a class="toc-anchor" href="#no-blockchain-and-thus-no-did-ion-method" >§</a> No Blockchain and thus no DID ION Method</h4>
+<p>Since we didn’t want to include a blockchain based DID method in Version one of DDIP, we do not require <a class="term-reference" href="#term:did-ion-method">DID ION method</a> support in DDIP, contrary to the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>. Of course implementations are free to support the <a class="term-reference" href="#term:did-ion-method">DID ION Method</a>. One of the drawbacks of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger based DID methods anyway.</p>
+<h4 id="addition-of-did-jwk-method"><a class="toc-anchor" href="#addition-of-did-jwk-method" >§</a> Addition of DID JWK Method</h4>
+<p>We do support the <a class="term-reference" href="#term:did-jwk-method">DID JWK Method</a>, given this DID method is simply an encoding of a Json Web Key. As such it also supports X509 certificates. This is a very common way to encode keys and certificates in current solutions and thus we believe it is important to support this method. A DID JWK can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u).</p>
+<h4 id="did-key-method"><a class="toc-anchor" href="#did-key-method" >§</a> DID Key Method</h4>
+<p>TODO: EBSI now is using JCS with DID:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would loose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates.</p>
+<h3 id="linked-domain-verification-is-fully-optional"><a class="toc-anchor" href="#linked-domain-verification-is-fully-optional" >§</a> Linked Domain Verification is fully optional</h3>
+<p>Contrary to the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>, the use of <a class="term-reference" href="#term:linked-domain-verification">Linked Domain Verification</a> is fully optional. If not present for a party, the other party should not raise an error. Although we believe Linked Domains are a nice optional trust anchor, we also wanted to keep the DDIP v1 profile as Simple as possible at this point in time. Focusing on technical interoperability first and governance interoperability later.</p>
 <h2 id="security-considerations"><a class="toc-anchor" href="#security-considerations" >§</a> Security Considerations</h2>
 <h2 id="use-cases"><a class="toc-anchor" href="#use-cases" >§</a> Use-Cases</h2>
 <h2 id="examples"><a class="toc-anchor" href="#examples" >§</a> Examples</h2>
@@ -156,20 +172,16 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <dd><a path-0="openid.net"path-1="specs"path-2="openid-connect-4-verifiable-presentations-1_0-ID1.html"href="https://openid.net/specs/openid-connect-4-verifiable-presentations-1_0-ID1.html" >OpenID for Verifiable Presentations (First Implementer’s Draft)</a>. Oliver Terbu, Torsten Lodderstedt, Kristina Yasuda, Adam Lemmon, Tobias Looker. 2022.04. Status: Standards Track.</dd>
 <dt><span id="term:vc-data-model-v1.1">VC Data Model v1.1</span></dt>
 <dd><a path-0="www.w3.org"path-1="TR"path-2="vc-data-model"path-3=""href="https://www.w3.org/TR/vc-data-model/" >Verifiable Credentials Data Model v1.1</a>. Manu Sporny, Dave Longley, David Chadwick. 2021.08. Status: W3C Proposed Recommendation.</dd>
+<dt><span id="term:jwt-vc-presentation-profile">JWT VC Presentation profile</span></dt>
+<dd><a path-0="identity.foundation"path-1="jwt-vc-presentation-profile"path-2=""href="https://identity.foundation/jwt-vc-presentation-profile/" >JWT VC Presentation Profile</a>, Daniel McGrogan, Kristina Yasuda, Jen Schreiber</dd>
 <dt><span id="term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</span></dt>
 <dd><a path-0="identity.foundation"path-1="presentation-exchange"path-2="spec"path-3="v1.0.0"path-4=""href="https://identity.foundation/presentation-exchange/spec/v1.0.0/" >Presentation Exchange v1.0.0</a>. Daniel Buchner, Brent Zundel, Martin Riedel.</dd>
 <dt><span id="term:did-web">did-web</span></dt>
 <dd><a path-0="github.com"path-1="w3c-ccg"path-2="did-method-web"href="https://github.com/w3c-ccg/did-method-web" >Web DID Method</a>. Oliver Terbu, Mike Xu, Dmitri Zagidulin, Amy Guy. Status: Registered in DID Specification Registry.</dd>
-<dt><span id="term:did-ion">did-ion</span></dt>
-<dd><a path-0="github.com"path-1="decentralized-identity"path-2="ion-did-method"href="https://github.com/decentralized-identity/ion-did-method" >ION DID Method</a>. Various DIF contributors. Status: Registered in DID Specification Registry.</dd>
 <dt><span id="term:oidc-registration">OIDC Registration</span></dt>
 <dd><a path-0="openid.net"path-1="specs"path-2="openid-connect-registration-1_0.html"href="https://openid.net/specs/openid-connect-registration-1_0.html" >OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1</a>. Nat Sakimura, John Bradley, Michael B. Jones. 2014.11. Status: Approved Specification.</dd>
-<dt><span id="term:sidetree">Sidetree</span></dt>
-<dd><a path-0="identity.foundation"path-1="sidetree"path-2="spec"path-3=""href="https://identity.foundation/sidetree/spec/" >Sidetree v1.0.0</a>. Daniel Buchner, Orie Steele, Troy Ronda. 2021.03. Status: DIF Ratified Specification.</dd>
 <dt><span id="term:well-known-did">Well Known DID</span></dt>
 <dd><a path-0="identity.foundation"path-1=".well-known"path-2="resources"path-3="did-configuration"path-4=""href="https://identity.foundation/.well-known/resources/did-configuration/" >Well Known DID Configuration</a>. Daniel Buchner, Orie Steele, Tobias Looker. 2021.01. Status: DIF Working Group Approved Draft.</dd>
-<dt><span id="term:identity-hub-(0.0.1-predraft)">Identity Hub (0.0.1 Predraft)</span></dt>
-<dd><a path-0="identity.foundation"path-1="decentralized-web-node"path-2="spec"path-3="0.0.1-predraft"path-4=""href="https://identity.foundation/decentralized-web-node/spec/0.0.1-predraft/" >Identity Hub - Decentralized Web Node 0.0.1 Predraft</a></dd>
 <dt><span id="term:status-list-2021-(0.0.1-predraft)">Status List 2021 (0.0.1 Predraft)</span></dt>
 <dd><a path-0="github.com"path-1="w3c"path-2="vc-status-list-2021"path-3="releases"path-4="tag"path-5="v0.0.1"href="https://github.com/w3c/vc-status-list-2021/releases/tag/v0.0.1" >Status List 2021 0.0.1 Predraft</a>. Manu Sporny, Dave Longley, Orie Steele, Mike Prorock, Mahmoud Alkhraishi. 2022.04. Status: Draft Community Group Report.</dd>
 </dl>
@@ -179,8 +191,6 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <dd><a path-0="github.com"path-1="json-web-proofs"path-2="json-web-proofs"path-3="blob"path-4="main"path-5="draft-jmiller-json-web-proof.md"href="https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-web-proof.md" >JSON Web Proof</a>. Jeremie Miller, David Waite, Michael B. Jones. Status: Internet-Draft.</dd>
 <dt><span id="term:jpa">JPA</span></dt>
 <dd><a path-0="github.com"path-1="json-web-proofs"path-2="json-web-proofs"path-3="blob"path-4="main"path-5="draft-jmiller-json-proof-algorithms.md"href="https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-proof-algorithms.md" >JSON Proof Algorithms</a>. Jeremie Miller, Michael B. Jones. Status: Internet-Draft.</dd>
-<dt><span id="term:decentralized-web-node">Decentralized Web Node</span></dt>
-<dd><a path-0="identity.foundation"path-1="decentralized-web-node"path-2="spec"path-3=""href="https://identity.foundation/decentralized-web-node/spec/" >Decentralized Web Node</a>. Daniel Buchner, Tobias Looker. Status: Draft.</dd>
 <dt><span id="term:sd-jwt">SD-JWT</span></dt>
 <dd><a path-0="datatracker.ietf.org"path-1="doc"path-2="html"path-3="draft-ietf-oauth-selective-disclosure-jwt"href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt" >Selective Disclosure for JWTs (SD-JWT)</a>. Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG</dd>
 </dl>
@@ -227,6 +237,20 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <li><a href="#structure-of-this-document" >Structure of this Document</a></li>
 <li><a href="#terminology" >Terminology</a></li>
 <li><a href="#profile" >Profile</a></li>
+<li><a href="#issuance" >Issuance</a></li>
+<li><a href="#presentation" >Presentation</a>
+<ul>
+<li><a href="#did-methods" >DID Methods</a>
+<ul>
+<li><a href="#did-web-method" >DID Web Method</a></li>
+<li><a href="#no-blockchain-and-thus-no-did-ion-method" >No Blockchain and thus no DID ION Method</a></li>
+<li><a href="#addition-of-did-jwk-method" >Addition of DID JWK Method</a></li>
+<li><a href="#did-key-method" >DID Key Method</a></li>
+</ul>
+</li>
+<li><a href="#linked-domain-verification-is-fully-optional" >Linked Domain Verification is fully optional</a></li>
+</ul>
+</li>
 <li><a href="#security-considerations" >Security Considerations</a></li>
 <li><a href="#use-cases" >Use-Cases</a></li>
 <li><a href="#examples" >Examples</a></li>
