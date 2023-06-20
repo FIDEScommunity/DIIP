@@ -129,8 +129,8 @@ This section consolidates in one place common terms used across open standards t
 <Describe the profile>
 Core components:
 
-- OpenID for Verifiable Credential Issuance (OpenID Connect for Verifiable Credential Issuance??? Check!)
-- OpenID for Verifiable Presentations (OpenID Connect for Verifiable Credential Presentations??? Check!)
+- OpenID for Verifiable Credential Issuance 
+- OpenID for Verifiable Presentations
 - Self-Issued OpenID Provider v2
 - DIF Presentation Exchange
 - Credential format: W3C Verifiable Credentials JWT
@@ -185,10 +185,10 @@ Support for the [[ref: did:web method]] as mentioned in the [[ref: JWT VC Presen
 We decided to exclude blockchains from DDIP v1, as Since we didn't want to include a blockchain-based DID method in DDIP v1, we do not require [[ref: did:ion method]] support in DDIP, contrary to the [[ref: JWT VC Presentation Profile]]. Of course implementations are free to support the [[ref: did:ion Method]]. One of the drawbacks of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger-based DID methods anyway.
 
 #### Addition of did:jwk Method
-We do support the [[ref: did:jwk Method]], given this DID method is simply an encoding of a Json Web Key. As such it also supports X509 certificates. This is a very common way to encode keys and certificates in current solutions and thus we believe it is important to support this method. A did:jwk can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u). 
+We do support the [[ref: did:jwk Method]], given this DID method is simply an encoding of a JSON Web Key. As such it also supports X.509 certificates. This is a very common way to encode keys and certificates in current solutions, thus we believe it is important to support this method. A did:jwk can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u). 
 
-#### DID Key Method
-TODO: EBSI now is using JCS with DID:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would loose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates.
+#### did:key Method
+TODO: EBSI now is using JCS with did:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would lose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates.
 
 
 ### Linked Domain Verification is fully optional
