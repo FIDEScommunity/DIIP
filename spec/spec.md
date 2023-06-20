@@ -9,13 +9,14 @@ Dutch Decentralized Identity Profile
 Editors:
 ~ [Niels Klomp](https://www.linkedin.com/in/niels-klomp/) (Sphereon)
 ~ [Timo Glastra](https://www.linkedin.com/in/timoglastra/) (Animo Solutions)
+~ [Maaike van Leuken](https://www.linkedin.com/in/maaike-van-leuken-0b1b7011a/) (TNO)
 
 Contributors:
 ~ [TODO]() 
 
 **Special Thanks:**
 
-This profile is based on a lot of work done by the SSI community, given this profile is largely based on and uses sections of the [DIF JWT VC Presentation Profile](https://identity.foundation/jwt-vc-presentation-profile/), we would like to place special thanks to the editors and contributors of that profile.
+This profile is based on a lot of work done by the Decentralized Identity community, given this profile is largely based on and uses sections of the [DIF JWT VC Presentation Profile](https://identity.foundation/jwt-vc-presentation-profile/), we would like to place special thanks to the editors and contributors of that profile.
 
 Participate:
 ~ [GitHub repo](https://github.com/DutchBlockchainCoalition/DDIP.git)
@@ -28,7 +29,7 @@ Participate:
 
 The Dutch Decentralized Identity Profile, or DDIP for short, defines a set of requirements against existing specifications to enable the interoperable issuance and presentation of Verifiable Credentials (VCs) between Wallets and Verifiers.
 
-This document is not a specification, but a **profile**. It outlines existing specifications required for implementations to interoperate among each other. It also clarifies mandatory to implement features for the optionalities mentioned in the referenced specifications.
+This document is not a specification, but a **profile**. It outlines existing specifications required for implementations to interoperate among each other. It also clarifies mandatory to implement features for the optionalities mentioned in the referenced specifications. <<The main rationale for selecting these standards is easy adoption.>>
 
 The profile uses OpenID for Verifiable Presentations ([[ref: OpenID4VP ID1]]) as the base protocol for the request and verification of W3C JWT VCs as W3C Verifiable Presentations ([[ref: VC Data Model v1.1]]). A full list of the open standards used in this profile can be found in [Overview of the Open Standards Requirements](#overview-of-the-open-standards-requirements).
 
@@ -71,8 +72,8 @@ The following items are out of scope for the current version of this document:
 - Non-native Wallets like web applications, PWAs, etc.
 
 ## Structure of this Document
-
-First, this profile outlines open standards required to be supported. Than, it describes detailed requirements for each specification.
+<<More?>>
+First, this profile outlines open standards required to be supported. Then, it describes detailed requirements for each specification.
 
 ## Terminology
 
@@ -125,24 +126,66 @@ This section consolidates in one place common terms used across open standards t
 
 ## Profile
 
+<Describe the profile>
+Core components:
+
+- OpenID for Verifiable Credential Issuance (OpenID Connect for Verifiable Credential Issuance??? Check!)
+- OpenID for Verifiable Presentations (OpenID Connect for Verifiable Credential Presentations??? Check!)
+- Self-Issued OpenID Provider v2
+- DIF Presentation Exchange
+- Credential format: W3C Verifiable Credentials JWT
+- Identifiers: did:web and did:jwk
+- Signature scheme: ES256
+- Revocation method: StatusList 2021
+
+Rationale behind the profile is to increase adoption through making the profile as accessible as possible. DDIP allows for the implementation of simple Decentralized Identity use cases, with less effort to implement the profile as opposed to other profiles. This boils down to using technologies that are well-specified and already have wide adoption. In the section below, we describe the design choices.
+
+
+<For each choice: why?>
+
+### No Blockchain
+
+### Signature Scheme
+When working with JWTs, only two signature algorithms can be used: ES256 and RS256. The first is based on the elliptic curve discrete logarithm problem, whereas the latter is based on the integer factorization problem. Elliptic-curve cryptography can achieve the same security as RSA with much shorter keys. Therefore DDIP supports ES256 (ECDSA using P-256 and SHA-256). 
+
+ <!--ES256 is short for ECDSA using P-256 and SHA-256.  -->
+
+<!-- ### Requirements (?) -->
+
+### Credential Format
+We wanted to work with the broadly known VC model. Proof formats that are actively being used to issue verifiable credentials according to the VC model are:
+- JWT-VC. External proof. JWT-VC has a high Technology Readiness Level (TRL) and are widely adopted in other existing standards. Compatible encoding schemes are JSON and JSON-LD.
+<!-- Do we make a choice in JSON / JSON-LD? -->
+- LDP-VC. Embedded proof, proof is included in the data.
+
+For more information, see [[ref: VC Data Model v1.1]].
+
+### Revocation Algorithm
+
+Status List 2021 is a bit string, where each credential has a position in the list. Based on the value of the bit, the credential is either revoked or not.
+
 ## Issuance
 TODO: For issuance of Verifiable Credentials...
+The issuance of credentials from the Issuer to the Holder's Wallet is done along the [[ref: OpenID4CI]] specification.
+<!-- Why do we follow this profile? -->
 
 
 ## Presentation
-The presentation from the Wallet to the Verifier is done using the [[ref: OpenID4VP]] and [[ref: Presentation Exchange v1.0.0]] specifications. Actually for DDIP we follow the [[ref: JWT VC Presentation Profile]], with the below changes
+The presentation of claims from the Holder's Wallet to the Verifier is done along the [[ref: OpenID4VP]] and [[ref: Presentation Exchange v1.0.0]] specifications. For DDIP we follow the [[ref: JWT VC Presentation Profile]], as this profile is supported by big-tech companies, but with some changes. The profile and the changes are explained below.
+<!-- Why do we follow this profile? -->
 
 ### DID Methods
-Implementers are required to support DID:WEB and DID:JWK. It does not have mandatory support for DID:ION, unlike the [[ref: JWT VC Presentation Profile]] which we use as a basis for the Presentation.
+Implementers are required to support did:web and did:jwk. It does not require mandatory support for did:ion, unlike the [[ref: JWT VC Presentation Profile]] which we use as a basis for the Presentation.
 
-#### DID Web Method
-Support for [[ref: DID WEB Method]] as mentioned in the [[ref: JWT VC Presentation Profile]] is required.
+#### did:web Method
+Support for the [[ref: did:web method]] as mentioned in the [[ref: JWT VC Presentation Profile]] is required. did:web supports key rotation, but not key history.
 
-#### No Blockchain and thus no DID ION Method
-Since we didn't want to include a blockchain based DID method in Version one of DDIP, we do not require [[ref: DID ION method]] support in DDIP, contrary to the [[ref: JWT VC Presentation Profile]]. Of course implementations are free to support the [[ref: DID ION Method]]. One of the drawbacks of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger based DID methods anyway.
+#### Removal of did:ion Method
+<!-- Why didn't we want to include blockchain? -->
+We decided to exclude blockchains from DDIP v1, as Since we didn't want to include a blockchain-based DID method in DDIP v1, we do not require [[ref: did:ion method]] support in DDIP, contrary to the [[ref: JWT VC Presentation Profile]]. Of course implementations are free to support the [[ref: did:ion Method]]. One of the drawbacks of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger-based DID methods anyway.
 
-#### Addition of DID JWK Method
-We do support the [[ref: DID JWK Method]], given this DID method is simply an encoding of a Json Web Key. As such it also supports X509 certificates. This is a very common way to encode keys and certificates in current solutions and thus we believe it is important to support this method. A DID JWK can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u). 
+#### Addition of did:jwk Method
+We do support the [[ref: did:jwk Method]], given this DID method is simply an encoding of a Json Web Key. As such it also supports X509 certificates. This is a very common way to encode keys and certificates in current solutions and thus we believe it is important to support this method. A did:jwk can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u). 
 
 #### DID Key Method
 TODO: EBSI now is using JCS with DID:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would loose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates.
@@ -151,20 +194,52 @@ TODO: EBSI now is using JCS with DID:key for NP. It makes sense that we once aga
 ### Linked Domain Verification is fully optional
 Contrary to the [[ref: JWT VC Presentation Profile]], the use of [[ref: Linked Domain Verification]] is fully optional. If not present for a party, the other party should not raise an error. Although we believe Linked Domains are a nice optional trust anchor, we also wanted to keep the DDIP v1 profile as Simple as possible at this point in time. Focusing on technical interoperability first and governance interoperability later.
 
-
 ## Security Considerations
+
+The same security consideration applies to DDIP as to the JWT-VC Presentation Profile. It is important to note that Cross-device SIOP is susceptible to a session phishing attack, where an attacker relays the request from a good Verifier/RP to a victim and is able to sign in as a victim. Implementers MUST implement mitigations most suitable to the use-case. For more details and concrete mitigations, see section 15 Security Considerations in [[ref: SIOPv2 ID1]].
+
+### Crypto Agility
+
+JWT-VC provides crypto agility, which allows for replacing the signature scheme when desired. Crypto agility is important for the migration to post-quantum signature schemes.
+
+## Privacy Considerations
+
+### Selective Disclosure
+
+JWT-VC does not allow for selective disclosure. 
+
+### Predicates
+
+JWT-VC does not allow for generating predicates. 
+
+### Issuer Unlinkability
+
+### Verifier Unlinkability
+
+### Uncorrelateability
+
+Verifier unlinkability is not achieved, as the signature scheme ECDSA is not capable of creating unlinkable signatures such that colluding verifiers can link verification processes together.
+
+### Observability
+The verifier has the possibility to observe the revocation status beyond the presentation, because they know the position of the credential in the bitstring.
 
 ## Use-Cases
 
+TBD
+
 ## Examples
 
-Examples are listed inline in above sections as well as in complete form within [Test Vectors](#test-vectors).
+<!-- Examples are listed inline in above sections as well as in complete form within [Test Vectors](#test-vectors). -->
 
 ## Implementations
 
+At time of writing, two wallets are compatible with DDIP, namely the Sphereon and Animo wallet.
+
 ## Testing
+TBD
 
 ## Test Vectors
+TBD
 
 ## References
 
@@ -205,8 +280,8 @@ Examples are listed inline in above sections as well as in complete form within 
 [[def: JPA]]
 ~ [JSON Proof Algorithms](https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-proof-algorithms.md). Jeremie Miller, Michael B. Jones. Status: Internet-Draft.
 
-[[def: SD-JWT]]
-~ [Selective Disclosure for JWTs (SD-JWT)](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt). Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG
+<!-- [[def: SD-JWT]]
+~ [Selective Disclosure for JWTs (SD-JWT)](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt). Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG -->
 
 [[def: OIDC Registration]]
 ~ [OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1](https://openid.net/specs/openid-connect-registration-1_0.html). Nat Sakimura, John Bradley, Michael B. Jones. 2014.11. Status: Approved Specification.
