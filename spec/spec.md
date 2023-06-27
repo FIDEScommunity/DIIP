@@ -166,8 +166,6 @@ We decided to exclude blockchains from DDIP v1, as we wanted to keep the amount 
 DDIP requires the implementation of [[ref: did-jwk]], given this DID method is simply an encoding of a JSON Web Key. As such it also supports X.509 certificates. This is a very common way to encode keys and certificates in current systems, thus we believe it is important to support this method. A did:jwk can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u). 
 <!-- What value does the certificate chain add here? -->
 
-
-
 ### Signature Scheme
 When working with JWTs, it is recommended to work with the following two signature algorithms: ES256 and RS256. The first is based on the elliptic curve discrete logarithm problem, whereas the latter is based on the integer factorization problem. Elliptic-curve cryptography can achieve the same security as RSA with much shorter keys. Therefore, DDIP supports ES256 (ECDSA using P-256 and SHA-256). 
 
@@ -190,10 +188,10 @@ OpenID for Verifiable Credential Issuance [[ref: OID4VCI]] allows for secure dir
 <!-- [[ref: OID4VCI]] can either be used standalone, or in combination with OAuth2 / OIDC IDP.  -->
 
 ### Presentation
-The presentation of claims from the [[ref: Holder]]'s Wallet to the Verifier is done along the [[ref: OpenID4VP ID1]] and [[ref: Presentation Exchange v1.0.0]] specifications. For DDIP we follow the [[ref: JWT VC Presentation Profile]], as this profile is supported by big-tech companies, but with some changes, as were described above in [Profile](#profile). We now describe the presentation-specific standards included in DDIP.
+The presentation of claims from the [[ref: Holder]]'s Wallet to the [[ref: Verifier]] is done along the [[ref: OpenID4VP ID1]] and [[ref: Presentation Exchange v1.0.0]] specifications. For DDIP we follow the [[ref: JWT VC Presentation Profile]], as this profile is supported by big-tech companies, but with some changes, as were described above in [Profile](#profile). We now describe the presentation-specific standards included in DDIP.
 
 #### SIOP
-[[ref: SIOPv2 ID1]], [[ref: Holder]]s can authenticate themselves with self-issued ID tokens and present self-attested claims directly to Verifiers (Relying Parties). The OpenID provider (OP) as specified in [[ref: OpenID Connect Core]] are under the subject's local control.
+Using [[ref: SIOPv2 ID1]], [[ref: Holder]]s can authenticate themselves with self-issued ID tokens and present self-attested claims directly to [[ref: Verifier]]s (Relying Parties). The OpenID provider (OP) as specified in [[ref: OpenID Connect Core]] are under the subject's local control.
 
 #### OID4VP
 Using OID4VP, the [[ref: Holder]]s can also present cryptographically verifiable claims issued by third-party [[ref: Issuer]]s, such that the Verifier can place trust in those [[ref: Issuer]]s, instead of the subject ([[ref: End-User]]).
