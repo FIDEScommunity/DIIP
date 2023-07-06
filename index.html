@@ -47,7 +47,7 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                     </header>
       
                     <article id="content">
-                      <h1 id="dutch-decentralized-identity-profile"><a class="toc-anchor" href="#dutch-decentralized-identity-profile" >§</a> Dutch Decentralized Identity Profile</h1>
+                      <h1 id="dutch-decentralized-identity-profile-v1"><a class="toc-anchor" href="#dutch-decentralized-identity-profile-v1" >§</a> Dutch Decentralized Identity Profile v1</h1>
 <p><strong>Profile Status:</strong> Draft</p>
 <p><strong>Latest Draft:</strong>
 <a path-0="dutchblockchaincoalition.github.io"path-1="DDIP"href="https://dutchblockchaincoalition.github.io/DDIP" >https://dutchblockchaincoalition.github.io/DDIP</a></p>
@@ -55,11 +55,12 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <dt>Editors:</dt>
 <dd><a path-0="www.linkedin.com"path-1="in"path-2="niels-klomp"path-3=""href="https://www.linkedin.com/in/niels-klomp/" >Niels Klomp</a> (Sphereon)</dd>
 <dd><a path-0="www.linkedin.com"path-1="in"path-2="timoglastra"path-3=""href="https://www.linkedin.com/in/timoglastra/" >Timo Glastra</a> (Animo Solutions)</dd>
+<dd><a path-0="www.linkedin.com"path-1="in"path-2="maaike-van-leuken-0b1b7011a"path-3=""href="https://www.linkedin.com/in/maaike-van-leuken-0b1b7011a/" >Maaike van Leuken</a> (TNO)</dd>
 <dt>Contributors:</dt>
 <dd><a href="" >TODO</a></dd>
 </dl>
 <p><strong>Special Thanks:</strong></p>
-<p>This profile is based on a lot of work done by the SSI community, given this profile is largely based on and uses sections of the <a path-0="identity.foundation"path-1="jwt-vc-presentation-profile"path-2=""href="https://identity.foundation/jwt-vc-presentation-profile/" >DIF JWT VC Presentation Profile</a>, we would like to place special thanks to the editors and contributors of that profile.</p>
+<p>This profile is based on a lot of work done by the Decentralized Identity community, given this profile is largely based on and uses sections of the <a path-0="identity.foundation"path-1="jwt-vc-presentation-profile"path-2=""href="https://identity.foundation/jwt-vc-presentation-profile/" >DIF JWT VC Presentation Profile</a>, we would like to place special thanks to the editors and contributors of that profile.</p>
 <dl>
 <dt>Participate:</dt>
 <dd><a path-0="github.com"path-1="DutchBlockchainCoalition"path-2="DDIP.git"href="https://github.com/DutchBlockchainCoalition/DDIP.git" >GitHub repo</a></dd>
@@ -68,102 +69,166 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 </dl>
 <hr>
 <h2 id="abstract"><a class="toc-anchor" href="#abstract" >§</a> Abstract</h2>
-<p>The Dutch Decentralized Identity Profile, or DDIP for short, defines a set of requirements against existing specifications to enable the interoperable issuance and presentation of Verifiable Credentials (VCs) between Wallets and Verifiers.</p>
-<p>This document is not a specification, but a <strong>profile</strong>. It outlines existing specifications required for implementations to interoperate among each other. It also clarifies mandatory to implement features for the optionalities mentioned in the referenced specifications.</p>
-<p>The profile uses OpenID for Verifiable Presentations (<a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a>) as the base protocol for the request and verification of W3C JWT VCs as W3C Verifiable Presentations (<a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>). A full list of the open standards used in this profile can be found in <a href="#overview-of-the-open-standards-requirements" >Overview of the Open Standards Requirements</a>.</p>
+<p>The Dutch Decentralized Identity Profile, or DDIP for short, defines a set of requirements against existing specifications to enable the interoperable issuance and presentation of Verifiable Credentials (VCs) between <a class="term-reference" href="#term:wallets">Wallets</a> and <a class="term-reference" href="#term:verifier">Verifier</a>s.</p>
+<p>This document is not a specification, but a <strong>profile</strong>. It outlines existing specifications required for implementations to interoperate among each other.</p>
+<!-- It also clarifies mandatory to implement features for the optionalities mentioned in the referenced specifications. -->
+<p>The main objective of this interop profile is to allow for easy adoption, through the choice of standards that are relatively easier to implement.</p>
+<p>The profile uses OpenID for Verifiable Presentations (<a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a>) as the base protocol for the request and verification of W3C JWT VCs as W3C Verifiable Presentations (<a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>). A full list of the open standards used in this profile can be found in <a href="#overview-of-the-open-standards" >Overview of the Open Standards</a>.</p>
 <h3 id="audience"><a class="toc-anchor" href="#audience" >§</a> Audience</h3>
-<p>The audience of the document includes Verifiable Credential implementers and/or enthusiasts. The first few sections give an overview of the problem area and profile requirements for DDIP. Subsequent sections are detailed and technical, describing the protocol flow and request-responses.</p>
+<p>The audience of the document includes Dutch organisations aiming to adopt Decentralized Identity, and Verifiable Credential implementers and/or enthusiasts. The first few sections give an overview of the problem area and profile requirements for DDIP. Subsequent sections are detailed and technical, describing the protocol flow and request-responses.</p>
 <h2 id="status-of-this-document"><a class="toc-anchor" href="#status-of-this-document" >§</a> Status of This Document</h2>
 <p>The status of the Dutch Decentralized Identity Profile v0.1.0 is a DRAFT specification under development.</p>
 <h3 id="description"><a class="toc-anchor" href="#description" >§</a> Description</h3>
 <p>The <a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a> specification defines the data model of Verifiable Credentials (VCs) but does not prescribe standards for transport protocol, key management, authentication, query language, etc. As a result, if implementers decide which standards to use for their implementations on their own, there is no guarantee that other companies will also support the same set of standards.</p>
 <p>This document aims to provide a path to interoperability by standardizing the set of specifications that enable the presentation of JWT VCs between implementers. Future versions of this document will include details on issuance and Wallet interoperability. Ultimately, this profile will define a standardized approach to Verifiable Credentials so that distributed developers, apps, and systems can share credentials through common means.</p>
 <h3 id="scope"><a class="toc-anchor" href="#scope" >§</a> Scope</h3>
-<h4 id="scope-2"><a class="toc-anchor" href="#scope-2" >§</a> Scope</h4>
-<p>This document is currently scoped for the presentation of VCs between the Wallet and the Verifier. The Wallet is a native mobile application. The following aspects are in scope:</p>
+<p>In this section, the scope of the interoperability profile is discussed.</p>
+<h4 id="within-scope"><a class="toc-anchor" href="#within-scope" >§</a> Within Scope</h4>
+<p>This document is currently scoped for the presentation of VCs between the <a class="term-reference" href="#term:wallet">Wallet</a> and the <a class="term-reference" href="#term:verifier">Verifier</a>. The Wallet is a native mobile application. The following aspects are in scope:</p>
 <ul>
 <li>Data model</li>
-<li>Protocol to request presentation of VCs, including query language</li>
+<li>Protocols to request presentation of VCs, including query language</li>
 <li>User authentication layer using Self-Issued ID Token</li>
-<li>Mechanism to establishing trust in the DID via Domain Linkage</li>
+<li>Mechanism to establishing trust in the <a class="term-reference" href="#term:decentralized-identifier">Decentralized Identifier</a> via Domain Linkage<!-- Is this one above correct? Seems like Linked Domain Verification at least is out of scope. -->
+</li>
 <li>Identifiers of the entities</li>
 <li>Revocation of VCs</li>
-<li>Crypto suites</li>
+<li>Cryptographic signature suites</li>
 </ul>
 <h4 id="out-of-scope"><a class="toc-anchor" href="#out-of-scope" >§</a> Out of Scope</h4>
 <p>The following items are out of scope for the current version of this document:</p>
 <ul>
-<li>Issuance of the VCs</li>
+<li>Issuance of the VCs<!-- I think we can include this, see section on Issuance. -->
+</li>
 <li>Advanced concepts in the <a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>: <code>credentialSchema</code> (<code>credentialType</code> is used instead), <code>refreshService</code>, <code>termsOfUse</code>, <code>evidence</code>, and Disputes.</li>
 <li>Selective disclosure and unlinkability</li>
-<li>Zero-Knowledge Proofs</li>
-<li>Non-native Wallets like web applications, PWAs, etc.</li>
+<li>Zero-Knowledge Proofs<!-- We can discuss SD and ZKPs, but we don't give specifications that are required to be interoperable. I'd say their indeed not in scope for the profile, but in latter sections (see below) we can discuss it. -->
+</li>
+<li>Non-native Wallets, such as web applications, PWAs, etc.</li>
 </ul>
+<!-- Why are cloud wallets out of scope? -->
+<h3 id="future-work"><a class="toc-anchor" href="#future-work" >§</a> Future Work</h3>
+<p>DDIP v1 describes technologies that are relatively easy to implement. However, a future version will include more advanced standards.</p>
+<!-- #### did:key Method
+TODO: EBSI now is using JCS with did:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would lose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates. --> 
+<!-- Next version? -->
 <h2 id="structure-of-this-document"><a class="toc-anchor" href="#structure-of-this-document" >§</a> Structure of this Document</h2>
-<p>First, this profile outlines open standards required to be supported. Than, it describes detailed requirements for each specification.</p>
+<p>First, this profile outlines open standards required to be supported. Then, it describes the considerations for choosing these open standards. We discuss the standards specific to <a href="#issuance" >issuing</a> or <a href="#presentation" >presentation</a> separately. This document then lists security and privacy considerations, use cases and examples, implementations and testing.</p>
 <h2 id="terminology"><a class="toc-anchor" href="#terminology" >§</a> Terminology</h2>
 <p>This section consolidates in one place common terms used across open standards that this profile consists of. For the details of these, as well as other useful terms, see text within each of the specification listed in <a class="term-reference" href="#term:references">References</a>.</p>
+<!-- [[def:Authorization Request]]
+~ OAuth 2.0 Authorization Request extended by [[ref: OpenID4VP ID1]] and [[ref: SIOPv2 ID1]].
+
+[[def:Authorization Response]]
+~ OAuth 2.0 Authorization Response extended by [[ref: OpenID4VP ID1]] and [[ref: SIOPv2 ID1]]. -->
 <dl>
-<dt><span id="term:authorization-request">Authorization Request</span></dt>
-<dd>OAuth 2.0 Authorization Request extended by <a class="term-reference" href="#term:openid4vp">OpenID4VP</a> and <a class="term-reference" href="#term:siopv2">SIOPv2</a>.</dd>
-<dt><span id="term:authorization-response">Authorization Response</span></dt>
-<dd>OAuth 2.0 Authorization Response extended by <a class="term-reference" href="#term:openid4vp">OpenID4VP</a> and <a class="term-reference" href="#term:siopv2">SIOPv2</a>.</dd>
 <dt><span id="term:did"><span id="term:decentralized-identifier">Decentralized Identifier</span></span></dt>
 <dd>An identifier with its core ability being enabling Clients to obtain key material and other metadata by reference, defined in <a class="term-reference" href="#term:did-core">DID Core</a>.</dd>
+<dt><span id="term:end-user">End-User</span></dt>
+<dd>Human Participant.</dd>
 <dt><span id="term:holder">Holder</span></dt>
 <dd>An entity that possesses or holds Verifiable Credentials and can generate Verifiable Presentations from them as defined in <a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>.</dd>
-<dt><span id="term:end-user">End User</span></dt>
-<dd>Human Participant.</dd>
+<dt><span id="term:issuer">Issuer</span></dt>
+<dd>A role an entity can perform by asserting claims about one or more subjects, creating a verifiable credential from these claims, and transmitting the verifiable credential to a <a class="term-reference" href="#term:holder">Holder</a>, as defined in <a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>.</dd>
 <dt><span id="term:openid-provider-(op)">OpenID Provider (OP)</span></dt>
-<dd>OAuth 2.0 Authentication Server implementing <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a> and <a class="term-reference" href="#term:openid4vp">OpenID4VP</a></dd>
+<dd>OAuth 2.0 Authentication Server implementing <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a> and <a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a></dd>
 <dt><span id="term:presentation">Presentation</span></dt>
-<dd>Data derived from one or more Verifiable Credentials, issued by one or more issuers, that is shared with a Verifier.</dd>
+<dd>Data derived from one or more Verifiable Credentials, issued by one or more <a class="term-reference" href="#term:issuer">Issuer</a>s, that is shared with a Verifier.</dd>
 <dt><span id="term:relying-party-(rp)">Relying Party (RP)</span></dt>
-<dd>OAuth 2.0 Client application using <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a> and <a class="term-reference" href="#term:openid4vp">OpenID4VP</a> in <a class="term-reference" href="#term:siopv2">SIOPv2</a>. Synonymous with term Verifier.</dd>
-<dt><span id="term:request-object">Request Object</span></dt>
-<dd>JWT that contains a set of Authorization Request parameters as its Claims.</dd>
+<dd>OAuth 2.0 Client application using <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a> and <a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a> in <a class="term-reference" href="#term:siopv2-id1">SIOPv2 ID1</a>. Synonymous with term Verifier.</dd>
+<dt>&lt;!-- <span id="term:request-object">Request Object</span></dt>
+<dd>JWT that contains a set of Authorization Request parameters as its Claims. --&gt;</dd>
 <dt><span id="term:self-issued-openid-provider-(self-issued-op)">Self-Issued OpenID Provider (Self-Issued OP)</span></dt>
-<dd>An OpenID Provider (OP) used by an End User to prove control over a cryptographically verifiable identifier such as a DID.</dd>
+<dd>An OpenID Provider (OP) used by an End User to prove control over a cryptographically verifiable identifier such as a <a class="term-reference" href="#term:decentralized-identifier">Decentralized Identifier</a>.</dd>
 <dt><span id="term:verifiable-credential-(vc)">Verifiable Credential (VC)</span></dt>
-<dd>A set of one or more Claims made by an issuer that is tamper-evident and has authorship that can be cryptographically verified.</dd>
+<dd>A set of one or more Claims made by an <a class="term-reference" href="#term:issuer">Issuer</a> that is tamper-evident and has authorship that can be cryptographically verified.</dd>
 <dt><span id="term:verifiable-presentation-(vp)">Verifiable Presentation (VP)</span></dt>
 <dd>A Presentation that is tamper-evident and has authorship that can be cryptographically verified.</dd>
 <dt><span id="term:verifier">Verifier</span></dt>
 <dd>An entity that receives one or more Verifiable Credentials inside a Verifiable Presentation for processing. During presentation of Credentials, Verifier acts as an OAuth 2.0 Client towards the Wallet that is acting as an OAuth 2.0 Authorization Server. The Verifier is a specific case of OAuth 2.0 Client, just like Relying Party (RP) in <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a>.</dd>
-<dt><span id="term:issuer">Issuer</span></dt>
-<dd>An entity that issues Verifiable Credentials.</dd>
 <dt><span id="term:wallet">Wallet</span></dt>
-<dd>An entity that receives, stores, presents, and manages credentials and key material of the End User. During presentation of VP(s) using <a class="term-reference" href="#term:openid4vp">OpenID4VP</a>, the Wallet acts as an OAuth 2.0 Authorization Server towards the Verifier that is acting as an OAuth 2.0 Client. During user authentication using <a class="term-reference" href="#term:siopv2">SIOPv2</a>, the Wallet acts as a Self Issued OpenID Provider towards the Verifier that is a specific case of the Relying Party in <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a>.</dd>
+<dd>An entity that receives, stores, presents, and manages credentials and key material of the End User. During presentation of VP(s) using <a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a>, the Wallet acts as an OAuth 2.0 Authorization Server towards the Verifier that is acting as an OAuth 2.0 Client. During user authentication using <a class="term-reference" href="#term:siopv2-id1">SIOPv2 ID1</a>, the Wallet acts as a Self Issued OpenID Provider towards the Verifier that is a specific case of the Relying Party in <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a>.</dd>
 </dl>
 <h2 id="profile"><a class="toc-anchor" href="#profile" >§</a> Profile</h2>
-<h2 id="issuance"><a class="toc-anchor" href="#issuance" >§</a> Issuance</h2>
-<p>TODO: For issuance of Verifiable Credentials…</p>
-<h2 id="presentation"><a class="toc-anchor" href="#presentation" >§</a> Presentation</h2>
-<p>The presentation from the Wallet to the Verifier is done using the <a class="term-reference" href="#term:openid4vp">OpenID4VP</a> and <a class="term-reference" href="#term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</a> specifications. Actually for DDIP we follow the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>, with the below changes</p>
+<p>In this section, we describe the interoperability profile.</p>
+<p>The rationale behind the profile is to increase adoption through making the profile as easy to adopt as possible. DDIP allows for the implementation of simple Decentralized Identity use cases, with less effort to implement the profile as opposed to other profiles. This boils down to using technologies that are well-specified and already have wide adoption. In the sections below, we first give an overview of the standards included in the profile, then we describe the design choices.</p>
+<h3 id="overview-of-the-open-standards"><a class="toc-anchor" href="#overview-of-the-open-standards" >§</a> Overview of the Open Standards</h3>
+<ul>
+<li><a class="term-reference" href="#term:oid4vci-1.0">OID4VCI 1.0</a></li>
+<li><a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a></li>
+<li><a class="term-reference" href="#term:siopv2-id1">SIOPv2 ID1</a></li>
+<li><a class="term-reference" href="#term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</a></li>
+<li>W3C Verifiable Credentials JWT (<a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>)</li>
+<li><a class="term-reference" href="#term:did-web">did-web</a> and <a class="term-reference" href="#term:did-jwk">did-jwk</a></li>
+<li>ES256</li>
+<li><a class="term-reference" href="#term:status-list-2021-(first-public-draft)">Status List 2021 (First public draft)</a></li>
+</ul>
 <h3 id="did-methods"><a class="toc-anchor" href="#did-methods" >§</a> DID Methods</h3>
-<p>Implementers are required to support DID:WEB and DID:JWK. It does not have mandatory support for DID:ION, unlike the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a> which we use as a basis for the Presentation.</p>
-<h4 id="did-web-method"><a class="toc-anchor" href="#did-web-method" >§</a> DID Web Method</h4>
-<p>Support for <a class="term-reference" href="#term:did-web-method">DID WEB Method</a> as mentioned in the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a> is required.</p>
-<h4 id="no-blockchain-and-thus-no-did-ion-method"><a class="toc-anchor" href="#no-blockchain-and-thus-no-did-ion-method" >§</a> No Blockchain and thus no DID ION Method</h4>
-<p>Since we didn’t want to include a blockchain based DID method in Version one of DDIP, we do not require <a class="term-reference" href="#term:did-ion-method">DID ION method</a> support in DDIP, contrary to the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>. Of course implementations are free to support the <a class="term-reference" href="#term:did-ion-method">DID ION Method</a>. One of the drawbacks of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger based DID methods anyway.</p>
-<h4 id="addition-of-did-jwk-method"><a class="toc-anchor" href="#addition-of-did-jwk-method" >§</a> Addition of DID JWK Method</h4>
-<p>We do support the <a class="term-reference" href="#term:did-jwk-method">DID JWK Method</a>, given this DID method is simply an encoding of a Json Web Key. As such it also supports X509 certificates. This is a very common way to encode keys and certificates in current solutions and thus we believe it is important to support this method. A DID JWK can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u).</p>
-<h4 id="did-key-method"><a class="toc-anchor" href="#did-key-method" >§</a> DID Key Method</h4>
-<p>TODO: EBSI now is using JCS with DID:key for NP. It makes sense that we once again favor did:key over did:web. It does mean we would loose the ability to use X509 certificates, as did:key can only handle RSA keys and no certificates.</p>
+<p>Implementers are required to support did:web and did:jwk. It does not require mandatory support for did:ion, unlike the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a> which we use as a basis for the Presentation.</p>
+<h4 id="didweb-method"><a class="toc-anchor" href="#didweb-method" >§</a> did:web Method</h4>
+<p>Support for the <a class="term-reference" href="#term:did-web">did-web</a> as mentioned in the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a> is required. did:web supports key rotation, but not key history.</p>
+<h4 id="removal-of-didion-method"><a class="toc-anchor" href="#removal-of-didion-method" >§</a> Removal of did:ion Method</h4>
+<p>We decided to exclude blockchains from DDIP v1, as we wanted to keep the amount of requirements to a bare minimum. This means that DDIP v1 also does not include blockchain-based <a class="term-reference" href="#term:decentralized-identifier">Decentralized Identifier</a> methods. Hence, <a class="term-reference" href="#term:did-ion">did-ion</a> support is not required in this profile, contrary to the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>. Of course implementations are free to support the <a class="term-reference" href="#term:did-ion">did-ion</a>. One of the drawbacks of not using blockchain-based DID methods of course is that this means that key history as well as rotations are not really supported in an interoperable way. This is mostly a problem for organizations, since Natural Persons would never use ledger-based DID methods anyway.</p>
+<h4 id="addition-of-didjwk-method"><a class="toc-anchor" href="#addition-of-didjwk-method" >§</a> Addition of did:jwk Method</h4>
+<p>DDIP requires the implementation of <a class="term-reference" href="#term:did-jwk">did-jwk</a>, given this DID method is simply an encoding of a JSON Web Key. As such it also supports X.509 certificates. This is a very common way to encode keys and certificates in current systems, thus we believe it is important to support this method. A did:jwk can either have a Certificate Chain incorporated (x5c) in the DID Document or linked as a URL (x5u).</p>
+<!-- What value does the certificate chain add here? -->
+<h3 id="signature-scheme"><a class="toc-anchor" href="#signature-scheme" >§</a> Signature Scheme</h3>
+<p>When working with JWTs, it is recommended to work with the following two signature algorithms: ES256 and RS256. The first is based on the elliptic curve discrete logarithm problem, whereas the latter is based on the integer factorization problem. Elliptic-curve cryptography can achieve the same security as RSA with much shorter keys. Therefore, DDIP supports ES256 (ECDSA using P-256 and SHA-256).</p>
+<h3 id="credential-format"><a class="toc-anchor" href="#credential-format" >§</a> Credential Format</h3>
+<p>We wanted to work with the broadly known VC model. Proof formats that are actively being used to issue verifiable credentials according to the VC model are:</p>
+<ul>
+<li>JWT-VC. External proof. JWT-VC has a high Technology Readiness Level (TRL) and are widely adopted in other existing standards. Compatible encoding schemes are JSON and JSON-LD. DDIP v1 requires JSON, in future versions JSON-LD will also be supported.</li>
+<li>LDP-VC. Embedded proof, proof is included in the data.</li>
+</ul>
+<p>For more information, see <a class="term-reference" href="#term:vc-data-model-v1.1">VC Data Model v1.1</a>.</p>
+<h3 id="revocation-algorithm"><a class="toc-anchor" href="#revocation-algorithm" >§</a> Revocation Algorithm</h3>
+<p><a class="term-reference" href="#term:status-list-2021-(first-public-draft)">Status List 2021 (First public draft)</a> is a bit string, where each credential has a position in the list. Based on the value of the bit, the credential is either revoked or not. The status list is highly-space efficient, while providing herd privacy.</p>
+<h3 id="issuance"><a class="toc-anchor" href="#issuance" >§</a> Issuance</h3>
+<p>The issuance of credentials from the <a class="term-reference" href="#term:issuer">Issuer</a> to the <a class="term-reference" href="#term:holder">Holder</a>'s Wallet is done along the <a class="term-reference" href="#term:oid4vci-1.0">OID4VCI 1.0</a> specification. We follow the <a class="term-reference" href="#term:jwtc-vc-issuance-profile">JWTC VC Issuance Profile</a>, with the alterations mentioned above in <a href="#profile" >Profile</a>. In addition to the ‘base’ profile, we use <a class="term-reference" href="#term:oid4vci">OID4VCI</a>.</p>
+<h4 id="oid4vci"><a class="toc-anchor" href="#oid4vci" >§</a> OID4VCI</h4>
+<p>OpenID for Verifiable Credential Issuance <a class="term-reference" href="#term:oid4vci">OID4VCI</a> allows for secure direct presentation of the credential from the <a class="term-reference" href="#term:holder">Holder</a> (<a class="term-reference" href="#term:end-user">End-User</a>) to the Verifier (Relying Party), without involvement of the <a class="term-reference" href="#term:issuer">Issuer</a>.</p>
+<!-- [[ref: OID4VCI]] can either be used standalone, or in combination with OAuth2 / OIDC IDP.  -->
+<h3 id="presentation"><a class="toc-anchor" href="#presentation" >§</a> Presentation</h3>
+<p>The presentation of claims from the <a class="term-reference" href="#term:holder">Holder</a>'s Wallet to the <a class="term-reference" href="#term:verifier">Verifier</a> is done along the <a class="term-reference" href="#term:openid4vp-id1">OpenID4VP ID1</a> and <a class="term-reference" href="#term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</a> specifications. For DDIP we follow the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>, as this profile is supported by big-tech companies, but with some changes, as were described above in <a href="#profile" >Profile</a>. We now describe the presentation-specific standards included in DDIP.</p>
+<h4 id="siop"><a class="toc-anchor" href="#siop" >§</a> SIOP</h4>
+<p>Using <a class="term-reference" href="#term:siopv2-id1">SIOPv2 ID1</a>, <a class="term-reference" href="#term:holder">Holder</a>s can authenticate themselves with self-issued ID tokens and present self-attested claims directly to <a class="term-reference" href="#term:verifier">Verifier</a>s (Relying Parties). The OpenID provider (OP) as specified in <a class="term-reference" href="#term:openid-connect-core">OpenID Connect Core</a> are under the subject’s local control.</p>
+<h4 id="oid4vp"><a class="toc-anchor" href="#oid4vp" >§</a> OID4VP</h4>
+<p>Using OID4VP, the <a class="term-reference" href="#term:holder">Holder</a>s can also present cryptographically verifiable claims issued by third-party <a class="term-reference" href="#term:issuer">Issuer</a>s, such that the Verifier can place trust in those <a class="term-reference" href="#term:issuer">Issuer</a>s, instead of the subject (<a class="term-reference" href="#term:end-user">End-User</a>).</p>
+<!-- OID4VP can either be used icw SIOPv2 or with OIDC. -->
+<h4 id="presentation-exchange"><a class="toc-anchor" href="#presentation-exchange" >§</a> Presentation Exchange</h4>
+<p><a class="term-reference" href="#term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</a> defines two steps that have to be executed before the <a class="term-reference" href="#term:holder">Holder</a> can present a proof to the <a class="term-reference" href="#term:verifier">Verifier</a>: the <a class="term-reference" href="#term:verifier">Verifier</a> first has to describe proof requirements, then the <a class="term-reference" href="#term:holder">Holder</a> has to describe a submission of proof aligning with those requirements.</p>
+<!-- ### Requirements (?) -->
 <h3 id="linked-domain-verification-is-fully-optional"><a class="toc-anchor" href="#linked-domain-verification-is-fully-optional" >§</a> Linked Domain Verification is fully optional</h3>
 <p>Contrary to the <a class="term-reference" href="#term:jwt-vc-presentation-profile">JWT VC Presentation Profile</a>, the use of <a class="term-reference" href="#term:linked-domain-verification">Linked Domain Verification</a> is fully optional. If not present for a party, the other party should not raise an error. Although we believe Linked Domains are a nice optional trust anchor, we also wanted to keep the DDIP v1 profile as Simple as possible at this point in time. Focusing on technical interoperability first and governance interoperability later.</p>
 <h2 id="security-considerations"><a class="toc-anchor" href="#security-considerations" >§</a> Security Considerations</h2>
+<p>The same security consideration applies to DDIP as to the JWT-VC Presentation Profile. It is important to note that Cross-device SIOP is susceptible to a session phishing attack, where an attacker relays the request from a good <a class="term-reference" href="#term:verifier">Verifier</a> to a victim and is able to sign in as a victim. Implementers MUST implement mitigations most suitable to the use-case. For more details and concrete mitigations, see section 15 Security Considerations in <a class="term-reference" href="#term:siopv2-id1">SIOPv2 ID1</a>.</p>
+<h3 id="crypto-agility"><a class="toc-anchor" href="#crypto-agility" >§</a> Crypto Agility</h3>
+<p>JWT-VC provides crypto agility, which allows for replacing the signature scheme when desired. Crypto agility is important for the migration to post-quantum signature schemes.</p>
+<h2 id="privacy-considerations"><a class="toc-anchor" href="#privacy-considerations" >§</a> Privacy Considerations</h2>
+<h3 id="selective-disclosure"><a class="toc-anchor" href="#selective-disclosure" >§</a> Selective Disclosure</h3>
+<p>JWT-VC does not allow for selective disclosure. Selective disclosure can however still be provided on a governance level.</p>
+<h3 id="predicates"><a class="toc-anchor" href="#predicates" >§</a> Predicates</h3>
+<p>JWT-VC does not allow for generating predicates. Predicates can however still be provided on a governance level.</p>
+<!-- ### Issuer Unlinkability-->
+<h3 id="verifier-unlinkability"><a class="toc-anchor" href="#verifier-unlinkability" >§</a> Verifier Unlinkability</h3>
+<p>Verifier unlinkability is not achieved, as the signature scheme ECDSA is not capable of creating unlinkable signatures such that colluding verifiers can link verification processes together.</p>
+<h3 id="observability"><a class="toc-anchor" href="#observability" >§</a> Observability</h3>
+<p>The <a class="term-reference" href="#term:verifier">Verifier</a> has the possibility to observe the revocation status beyond the presentation, because they know the position of the credential in the bitstring.</p>
 <h2 id="use-cases"><a class="toc-anchor" href="#use-cases" >§</a> Use-Cases</h2>
+<p>TBD</p>
 <h2 id="examples"><a class="toc-anchor" href="#examples" >§</a> Examples</h2>
-<p>Examples are listed inline in above sections as well as in complete form within <a href="#test-vectors" >Test Vectors</a>.</p>
+<!-- Examples are listed inline in above sections as well as in complete form within [Test Vectors](#test-vectors). -->
 <h2 id="implementations"><a class="toc-anchor" href="#implementations" >§</a> Implementations</h2>
+<p>At time of writing, two wallets are compatible with DDIP v1, namely the Sphereon and Animo wallet.</p>
 <h2 id="testing"><a class="toc-anchor" href="#testing" >§</a> Testing</h2>
+<p>TBD</p>
 <h2 id="test-vectors"><a class="toc-anchor" href="#test-vectors" >§</a> Test Vectors</h2>
+<p>TBD</p>
 <h2 id="references"><a class="toc-anchor" href="#references" >§</a> References</h2>
 <h3 id="normative-references"><a class="toc-anchor" href="#normative-references" >§</a> Normative References</h3>
 <dl>
-<dt><span id="term:openid-connect-core">OpenID Connect Core</span></dt>
-<dd><a path-0="openid.net"path-1="specs"path-2="openid-connect-core-1_0.html"href="https://openid.net/specs/openid-connect-core-1_0.html" >Open ID Connect</a>. Nat Sakimura, John Bradley, Michael B. Jones, Breno de Medeiros, Chuck Mortimore. 2014.11. Status: Approved Specification.</dd>
+<dt><span id="term:oid4vci-1.0">OID4VCI 1.0</span></dt>
+<dd><a path-0="openid.bitbucket.io"path-1="connect"path-2="openid-4-verifiable-credential-issuance-1_0.html"href="https://openid.bitbucket.io/connect/openid-4-verifiable-credential-issuance-1_0.html" >OpenID for Verifiable Credential Issuance 1.0</a>. Torsten Lodderstedt, Kristina Yasuda, Tobias Looker. 2023.06.</dd>
 <dt><span id="term:did-core">DID Core</span></dt>
 <dd><a path-0="www.w3.org"path-1="TR"path-2="2021"path-3="PR-did-core-20210803"path-4=""href="https://www.w3.org/TR/2021/PR-did-core-20210803/" >Decentralized Identifiers (DIDs) v1.0</a>. Manu Sporny, Dave Longley, Markus Sabadello, Drummond Reed, Orie Steele, Christopher Allen. 2021.08. Status: W3C Proposed Recommendation.</dd>
 <dt><span id="term:siopv2-id1">SIOPv2 ID1</span></dt>
@@ -173,26 +238,34 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <dt><span id="term:vc-data-model-v1.1">VC Data Model v1.1</span></dt>
 <dd><a path-0="www.w3.org"path-1="TR"path-2="vc-data-model"path-3=""href="https://www.w3.org/TR/vc-data-model/" >Verifiable Credentials Data Model v1.1</a>. Manu Sporny, Dave Longley, David Chadwick. 2021.08. Status: W3C Proposed Recommendation.</dd>
 <dt><span id="term:jwt-vc-presentation-profile">JWT VC Presentation profile</span></dt>
-<dd><a path-0="identity.foundation"path-1="jwt-vc-presentation-profile"path-2=""href="https://identity.foundation/jwt-vc-presentation-profile/" >JWT VC Presentation Profile</a>, Daniel McGrogan, Kristina Yasuda, Jen Schreiber</dd>
+<dd><a path-0="identity.foundation"path-1="jwt-vc-presentation-profile"path-2=""href="https://identity.foundation/jwt-vc-presentation-profile/" >JWT VC Presentation Profile</a>. Daniel McGrogan, Kristina Yasuda, Jen Schreiber.</dd>
 <dt><span id="term:presentation-exchange-v1.0.0">Presentation Exchange v1.0.0</span></dt>
 <dd><a path-0="identity.foundation"path-1="presentation-exchange"path-2="spec"path-3="v1.0.0"path-4=""href="https://identity.foundation/presentation-exchange/spec/v1.0.0/" >Presentation Exchange v1.0.0</a>. Daniel Buchner, Brent Zundel, Martin Riedel.</dd>
 <dt><span id="term:did-web">did-web</span></dt>
-<dd><a path-0="github.com"path-1="w3c-ccg"path-2="did-method-web"href="https://github.com/w3c-ccg/did-method-web" >Web DID Method</a>. Oliver Terbu, Mike Xu, Dmitri Zagidulin, Amy Guy. Status: Registered in DID Specification Registry.</dd>
+<dd><a path-0="github.com"path-1="w3c-ccg"path-2="did-method-web"href="https://github.com/w3c-ccg/did-method-web" >did:web Method</a>. Oliver Terbu, Mike Xu, Dmitri Zagidulin, Amy Guy. Status: Registered in DID Specification Registry.</dd>
+<dt><span id="term:did-jwk">did-jwk</span></dt>
+<dd><a path-0="github.com"path-1="quartzjer"path-2="did-jwk"path-3="blob"path-4="main"path-5="spec.md"href="https://github.com/quartzjer/did-jwk/blob/main/spec.md" >did:jwk Method</a>. Status: Registered in DID Specification Registry.</dd>
 <dt><span id="term:status-list-2021-(first-public-draft)">Status List 2021 (First public draft)</span></dt>
 <dd><a path-0="www.w3.org"path-1="TR"path-2="vc-status-list"path-3=""href="https://www.w3.org/TR/vc-status-list/" >Status List 2021 0.0.1 Predraft</a>. Manu Sporny, Dave Longley, Orie Steele, Mike Prorock, Mahmoud Alkhraishi. 2022.04. Status: Draft Community Group Report.</dd>
 </dl>
 <h3 id="non-normative-references"><a class="toc-anchor" href="#non-normative-references" >§</a> Non-Normative References</h3>
 <dl>
+<dt><span id="term:openid-connect-core">OpenID Connect Core</span></dt>
+<dd><a path-0="openid.net"path-1="specs"path-2="openid-connect-core-1_0.html"href="https://openid.net/specs/openid-connect-core-1_0.html" >OpenID Connect</a>. Nat Sakimura, John Bradley, Michael B. Jones, Breno de Medeiros, Chuck Mortimore. 2014.11. Status: Approved Specification.</dd>
+<dt><span id="term:did-ion">did-ion</span></dt>
+<dd><a path-0="github.com"path-1="decentralized-identity"path-2="ion"href="https://github.com/decentralized-identity/ion" >did:ion Method</a>.</dd>
 <dt><span id="term:jwp">JWP</span></dt>
 <dd><a path-0="github.com"path-1="json-web-proofs"path-2="json-web-proofs"path-3="blob"path-4="main"path-5="draft-jmiller-json-web-proof.md"href="https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-web-proof.md" >JSON Web Proof</a>. Jeremie Miller, David Waite, Michael B. Jones. Status: Internet-Draft.</dd>
 <dt><span id="term:jpa">JPA</span></dt>
 <dd><a path-0="github.com"path-1="json-web-proofs"path-2="json-web-proofs"path-3="blob"path-4="main"path-5="draft-jmiller-json-proof-algorithms.md"href="https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-proof-algorithms.md" >JSON Proof Algorithms</a>. Jeremie Miller, Michael B. Jones. Status: Internet-Draft.</dd>
-<dt><span id="term:sd-jwt">SD-JWT</span></dt>
-<dd><a path-0="datatracker.ietf.org"path-1="doc"path-2="html"path-3="draft-ietf-oauth-selective-disclosure-jwt"href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt" >Selective Disclosure for JWTs (SD-JWT)</a>. Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG</dd>
+<dt>&lt;!-- <span id="term:sd-jwt">SD-JWT</span></dt>
+<dd><a path-0="datatracker.ietf.org"path-1="doc"path-2="html"path-3="draft-ietf-oauth-selective-disclosure-jwt"href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt" >Selective Disclosure for JWTs (SD-JWT)</a>. Daniel Fett, Kristina Yasuda, Brian Campbell. Status: Internet-Draft in Web Authorization Protocol WG --&gt;</dd>
 <dt><span id="term:oidc-registration">OIDC Registration</span></dt>
 <dd><a path-0="openid.net"path-1="specs"path-2="openid-connect-registration-1_0.html"href="https://openid.net/specs/openid-connect-registration-1_0.html" >OpenID Connect Dynamic Client Registration 1.0 incorporating errata set 1</a>. Nat Sakimura, John Bradley, Michael B. Jones. 2014.11. Status: Approved Specification.</dd>
 <dt><span id="term:well-known-did">Well Known DID</span></dt>
 <dd><a path-0="identity.foundation"path-1=".well-known"path-2="resources"path-3="did-configuration"path-4=""href="https://identity.foundation/.well-known/resources/did-configuration/" >Well Known DID Configuration</a>. Daniel Buchner, Orie Steele, Tobias Looker. 2021.01. Status: DIF Working Group Approved Draft.</dd>
+<dt><span id="term:linked-domain-verification">Linked Domain Verification</span></dt>
+<dd><a path-0="identity.foundation"path-1="jwt-vc-presentation-profile"path-2="#linked-domain-verification"href="https://identity.foundation/jwt-vc-presentation-profile/#linked-domain-verification" >JWT-VC Presentation Profile Linked Domain Verification</a>. Daniel McGrogan, Kristina Yasuda, Jen Schreiber.</dd>
 </dl>
 
                     </article>    
@@ -228,30 +301,56 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <li><a href="#description" >Description</a></li>
 <li><a href="#scope" >Scope</a>
 <ul>
-<li><a href="#scope-2" >Scope</a></li>
+<li><a href="#within-scope" >Within Scope</a></li>
 <li><a href="#out-of-scope" >Out of Scope</a></li>
 </ul>
 </li>
+<li><a href="#future-work" >Future Work</a></li>
 </ul>
 </li>
 <li><a href="#structure-of-this-document" >Structure of this Document</a></li>
 <li><a href="#terminology" >Terminology</a></li>
-<li><a href="#profile" >Profile</a></li>
-<li><a href="#issuance" >Issuance</a></li>
-<li><a href="#presentation" >Presentation</a>
+<li><a href="#profile" >Profile</a>
 <ul>
+<li><a href="#overview-of-the-open-standards" >Overview of the Open Standards</a></li>
 <li><a href="#did-methods" >DID Methods</a>
 <ul>
-<li><a href="#did-web-method" >DID Web Method</a></li>
-<li><a href="#no-blockchain-and-thus-no-did-ion-method" >No Blockchain and thus no DID ION Method</a></li>
-<li><a href="#addition-of-did-jwk-method" >Addition of DID JWK Method</a></li>
-<li><a href="#did-key-method" >DID Key Method</a></li>
+<li><a href="#didweb-method" >did:web Method</a></li>
+<li><a href="#removal-of-didion-method" >Removal of did:ion Method</a></li>
+<li><a href="#addition-of-didjwk-method" >Addition of did:jwk Method</a></li>
+</ul>
+</li>
+<li><a href="#signature-scheme" >Signature Scheme</a></li>
+<li><a href="#credential-format" >Credential Format</a></li>
+<li><a href="#revocation-algorithm" >Revocation Algorithm</a></li>
+<li><a href="#issuance" >Issuance</a>
+<ul>
+<li><a href="#oid4vci" >OID4VCI</a></li>
+</ul>
+</li>
+<li><a href="#presentation" >Presentation</a>
+<ul>
+<li><a href="#siop" >SIOP</a></li>
+<li><a href="#oid4vp" >OID4VP</a></li>
+<li><a href="#presentation-exchange" >Presentation Exchange</a></li>
 </ul>
 </li>
 <li><a href="#linked-domain-verification-is-fully-optional" >Linked Domain Verification is fully optional</a></li>
 </ul>
 </li>
-<li><a href="#security-considerations" >Security Considerations</a></li>
+<li><a href="#security-considerations" >Security Considerations</a>
+<ul>
+<li><a href="#crypto-agility" >Crypto Agility</a></li>
+</ul>
+</li>
+<li><a href="#privacy-considerations" >Privacy Considerations</a>
+<ul>
+<li><a href="#selective-disclosure" >Selective Disclosure</a></li>
+<li><a href="#predicates" >Predicates</a></li>
+<li><a href="#verifier-unlinkability" >Verifier Unlinkability</a></li>
+<li><a href="#observability" >Observability</a></li>
+</ul>
+</li>
 <li><a href="#use-cases" >Use-Cases</a></li>
 <li><a href="#examples" >Examples</a></li>
 <li><a href="#implementations" >Implementations</a></li>
