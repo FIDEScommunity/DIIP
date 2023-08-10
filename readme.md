@@ -1,4 +1,4 @@
-# Decentralized Dutch Identity Profile (DDIP)
+# Dutch Decentralized Identity Profile (DDIP)
 
 **Latest Draft:**
 The latest draft can be found at:
