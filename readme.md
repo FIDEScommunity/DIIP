@@ -2,7 +2,7 @@
 
 **Latest Draft:**
 The latest draft can be found at:
-[https://dutchblockchaincoalition.github.io/DDIP](https://dutchblockchaincoalition.github.io/DIIP)
+[https://dutchblockchaincoalition.github.io/DIIP](https://dutchblockchaincoalition.github.io/DIIP)
 
 
 ## Contributing
