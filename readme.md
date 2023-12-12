@@ -1,13 +1,13 @@
-# Dutch Decentralized Identity Profile (DDIP)
+# Decentralized Identity Interop Profile (DIIP)
 
 **Latest Draft:**
 The latest draft can be found at:
-[https://dutchblockchaincoalition.github.io/DDIP](https://dutchblockchaincoalition.github.io/DDIP)
+[https://dutchblockchaincoalition.github.io/DDIP](https://dutchblockchaincoalition.github.io/DIIP)
 
 
 ## Contributing
 
-We invite anyone to raise issues or pull requests. Please check [existing issues](https://github.com/DutchBlockchainCoalition/DDIP/issues) before creating a new one.
+We invite anyone to raise issues or pull requests. Please check [existing issues](https://github.com/DutchBlockchainCoalition/DIIP/issues) before creating a new one.
 
 ## Getting Started
 
