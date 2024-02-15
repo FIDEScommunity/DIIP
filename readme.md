@@ -7,7 +7,7 @@ The latest draft can be found at:
 
 ## Contributing
 
-We invite anyone to raise issues or pull requests. Please check [existing issues](https://github.com/DutchBlockchainCoalition/DIIP/issues) before creating a new one.
+We invite anyone to raise issues or pull requests. Please check [existing issues](https://github.com/DutchBlockchainCoalition/DIIP/issues) before creating a new one. Join the [Discord](https://discord.gg/fvtPVzKv) to discuss DIIP with the community.
 
 ## Getting Started
 
