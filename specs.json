@@ -2,15 +2,15 @@
 {
   "specs": [
     {
-      "title": "Dutch Decentralized Identity Profile",
+      "title": "Decentralized Identity Interop Profile",
       "spec_directory": "./spec",
       "output_path": "./",
       "logo": "logo.png",
-      "logo_link": "https://github.com/DutchBlockchainCoalition/DDIP",
+      "logo_link": "https://github.com/DutchBlockchainCoalition/DIIP",
       "source": {
         "host": "github",
         "account": "DutchBlockchainCoalition",
-        "repo": "DDIP"
+        "repo": "DIIP"
       },
       "assets": [
         { "path": "/custom-assets/custom.css" },
