@@ -1,4 +1,4 @@
-# Decentralized Identity Interop Profile (DIIP)
+# Decentralized Identity Interop Profile (DIIP) V2
 
 **Latest Draft:**
 The latest draft can be found at:
