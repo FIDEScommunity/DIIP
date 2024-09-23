@@ -2,12 +2,12 @@
 
 **Latest Draft:**
 The latest draft can be found at:
-[https://dutchblockchaincoalition.github.io/DIIP](https://dutchblockchaincoalition.github.io/DIIP)
+[https://fidescommunity.github.io/DIIP](https://fidescommunity.github.io/DIIP)
 
 
 ## Contributing
 
-We invite anyone to raise issues or pull requests. Please check [existing issues](https://github.com/DutchBlockchainCoalition/DIIP/issues) before creating a new one. Join the [Discord](https://discord.gg/fvtPVzKv) to discuss DIIP with the community.
+We invite anyone to raise issues or pull requests. Please check [existing issues](https://github.com/fidescommunity/DIIP/issues) before creating a new one. Join the [Discord](https://discord.gg/fvtPVzKv) to discuss DIIP with the community.
 
 ## Getting Started
 
