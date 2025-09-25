@@ -1,4 +1,4 @@
-Decentralized Identity Interop Profile v5-draft
+Decentralized Identity Interop Profile v5 (draft)
 ==================
 
 **Profile Status:** Draft
