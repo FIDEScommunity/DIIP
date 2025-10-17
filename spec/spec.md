@@ -31,13 +31,13 @@ The Decentralized Identity Interop Profile, or DIIP for short, defines requireme
 
 | Purpose                                                                  | Specification                                                                                  |
 | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| Credential format                                                        | [[ref: W3C VCDM]] 2.0 (20 March 2025) and [[ref: SD-JWT VC]] (draft 08)                            |
+| Credential format                                                        | [[ref: W3C VCDM]] 2.0 (20 March 2025) and [[ref: SD-JWT VC]] (draft 08)                        |
 | Signature scheme                                                         | SD-JWT as specified in [[ref: VC-JOSE-COSE]] (20 March 2025) and [[ref: SD-JWT VC]] (draft 08) |
 | Signature algorithm                                                      | [[ref: ES256]] (RFC 7518 May 2015)                                                             |
 | Identifying [[ref: Issuer]]s, [[ref: Holder]]s, and [[ref: Verifier]]s   | [[ref: did:jwk]] (Commit 8137ac4, Apr 14 2022) and [[ref: did:web]] (31 July 2024)             |
 | Issuance protocol                                                        | OpenID for Verifiable Credentials Issuance ([[ref: OID4VCI]]) (Draft 15)                       |
 | Presentation protocol                                                    | OpenID for Verifiable Presentations ([[ref: OID4VP]]) (Draft 28)                               |
-| Revocation mechanism                                                     | [[ref: IETF Token Status List]] (Draft 10, 2025-04-16)                                         |
+| Revocation mechanism                                                     | [[ref: IETF Token Status List]] (Draft 10, 2025-04-16) and [[ref: Bitstring Status List]] (15 May 2025) |
 
 The [Normative References](#normative-references) section links to the versions of specifications that DIIP-compliant implementations must support.
 
@@ -231,11 +231,42 @@ Expiration algorithms using [validFrom](https://www.w3.org/TR/vc-data-model-2.0/
 
 **Requirement: DIIP-compliant implementations MUST support checking the validity status of a [[ref: Digital Credential]] using `validFrom` and `validUntil` when they are specified.**
 
-The [[ref: IETF Token Status List]] defines a mechanism, data structures, and processing rules for representing the status of [[ref: Digital Credential]]s (and other "Tokens"). The statuses of Tokens are conveyed via a bit array in the Status List. The Status List is embedded in a Status List Token.
+The [[ref: IETF Token Status List]] defines a mechanism, data structures, and processing rules for representing the status of [[ref: Digital Credential]]s (and other "Tokens"). The statuses of Tokens are conveyed via a bit array in the Status List. The Status List is embedded in a Status List Token. A credential can reference one status list.
 
-The [[ref: Bitstring Status List]] is based on the same idea as the [[ref: IETF Token Status List]] and is simpler to implement since it doesn't require signing of the status list. The [[ref: IETF Token Status List]] may gain more support since it is recommended by [[ref: HAIP]].
+The [[ref: Bitstring Status List]] is based on the same idea as the [[ref: IETF Token Status List]] and is simpler to implement since it doesn't require signing of the status list. This type of status list is defined for [[ref: W3C VCDM]] credentials and allows implementation of multiple status lists.
 
-**Requirement: DIIP-compliant implementations MUST support [[ref: IETF Token Status List]] as a status list mechanism.**
+The [[ref: IETF Token Status List]] may gain more support since it is recommended by [[ref: HAIP]].
+
+**Requirement: DIIP-compliant implementations MUST support both [[ref: IETF Token Status List]] and [[ref: Bitstring Status List]] as a status list mechanism.**
+
+The [[ref: IETF Token Status List]] specification chapter 6 specifies a `status` claim containing the reference to the [[ref: IETF Token Status List]] implementation.
+
+**Requirement: DIIP-compliant implementations MUST support the [[ref: IETF Token Status List]] `status` claim at the root of JSON, JWT, SD-JWT, JOSE or COSE encoded credentials.**
+
+Implementors that use linked data proofs to secure the credential MUST supply a relevant `@context` to include the [[ref: IETF Token Status List]] `status` claim. SD-JWT implementations MUST NOT make the `status` claim selectively disclosable.
+
+The [[ref: W3C VCDM]] specification defines a `credentialStatus` attribute to encode token status references. The [[ref: Bitstring Status List]] specification indicates how to fill this structure. SD-JWT implementations MUST NOT make this attribute selectively disclosable.
+
+**Requirement: DIIP-compliant implementations MUST support the `credentialStatus` attribute of credentials according to the [[ref: W3C VCDM]] specification.**
+**Requirement: DIIP-compliant implementations MUST be able to interpret `credentialStatus` attributes following the [[ref: Bitstring Status List]] specification.**
+
+Instead of using the [[ref: IETF Token Status List]] `status` claim, implementators can choose to add a [[ref: W3C VCDM]] `credentialStatus` attribute entry to encode the [[ref: IETF Token Status List]] status list reference as follows:
+
+```json
+{
+    ...
+    "credentialStatus": [
+        ...,
+        {
+            "type": "statuslist+jwt",
+            "idx": 1242,
+            "uri": "https://example.com/statuslists/1"
+        }
+    ]
+}
+```
+
+**Requirement: DIIP-compliant implementations MUST be able to interpret `credentialStatus` attribute entries following the [[ref: IETF Token Status List]] specification with type `statuslist+jwt`.**
 
 ## Terminology
 
@@ -276,6 +307,9 @@ This section consolidates in one place common terms used across open standards t
 ## References
 
 ### Normative References
+
+[[def: Bitstring Status List]]
+~ [Bitstring Status List v1.0](https://www.w3.org/TR/vc-bitstring-status-list/). Status: W3C Proposed Recommendation.
 
 [[def: did:jwk]]
 ~ [did:jwk Method Specification](https://github.com/quartzjer/did-jwk/blob/main/spec.md). Status: Draft.
@@ -319,8 +353,6 @@ This section consolidates in one place common terms used across open standards t
 [[def: ARF]]
 ~ [Architecture and Reference Framework](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/architecture-and-reference-framework-main/). Status: Draft.
 
-[[def: Bitstring Status List]]
-~ [Bitstring Status List v1.0](https://www.w3.org/TR/vc-bitstring-status-list/). Status: W3C Proposed Recommendation.
 
 [[def: DID Core]]
 ~ [Decentralized Identifiers (DIDs) v1.0](https://www.w3.org/TR/did-1.0/). Status: W3C Recommendation.
