@@ -8,6 +8,10 @@
 **Latest Draft:**
 [https://FIDEScommunity.github.io/DIIP/draft](https://FIDEScommunity.github.io/DIIP/draft)
 
+**Previous Releases:**
+[v4](v4.html),
+[v5](v5.html)
+
 Editors:
 ~ [Eelco Klaver](https://www.linkedin.com/in/eklaver/) (Credenco)
 ~ [Harmen van der Kooij](https://www.linkedin.com/in/harmenvanderkooij/) (FIDES Labs)

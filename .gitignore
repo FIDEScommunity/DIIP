@@ -108,7 +108,7 @@ dist
 .tern-port
 
 # Spec-Up generated files and build artifacts
-*.html
+index.html
 !spec/**/*.html
 
 # GitHub Pages deployment artifacts  

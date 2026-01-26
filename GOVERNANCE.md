@@ -67,6 +67,7 @@ DIIP operates on a structured 6-month release cycle:
 
 - **Published Version**: Available at [https://FIDEScommunity.github.io/DIIP](https://FIDEScommunity.github.io/DIIP)
 - **Draft Version**: Available at [https://FIDEScommunity.github.io/DIIP/draft](https://FIDEScommunity.github.io/DIIP/draft)
+- **Previous Versions***: Available as static files in the main branch. Examples: [v4](https://FIDEScommunity.github.io/DIIP/v4.html), [v5](https://FIDEScommunity.github.io/DIIP/v5.html)
 
 ## Decision Making Process
 
