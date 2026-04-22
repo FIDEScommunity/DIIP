@@ -337,7 +337,7 @@ This section consolidates in one place common terms used across open standards t
 ~ [RFC 7636 Proof Key for Code Exchange by OAuth Public Clients](https://datatracker.ietf.org/doc/html/rfc7636). Status: RFC - Proposed Standard.
 
 [[def: SD-JWT VC]]
-~ [SD-JWT-based Verifiable Credentials (SD-JWT VC) - draft 13](hhttps://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/13/). Status: WG Document.
+~ [SD-JWT-based Verifiable Credentials (SD-JWT VC) - draft 13](https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/13/). Status: WG Document.
 
 [[def: Secp256r1]]
 ~ `Secp256r1` curve in [RFC 5480 ECC SubjectPublicKeyInfo Format](https://datatracker.ietf.org/doc/html/rfc5480). Status: RFC - Proposed Standard.
