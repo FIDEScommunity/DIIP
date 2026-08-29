@@ -18,6 +18,7 @@ DIIP follows a **6-month release cycle**:
 
 - **Latest Published Version**: [https://FIDEScommunity.github.io/DIIP](https://FIDEScommunity.github.io/DIIP)
 - **Latest Draft**: [https://FIDEScommunity.github.io/DIIP/draft](https://FIDEScommunity.github.io/DIIP/draft)
+- **Old Versions**: Static HTML files on the root level of this repository, e.g., [v4.html](v4.html) and [v5.html](v5.html).
 
 ## How to Contribute
 
@@ -44,15 +45,8 @@ The preview link will be posted as a comment on your PR once the build completes
 
 ### Review Process
 
-- **Anyone can review**: All community members are encouraged to provide review comments and feedback on PRs
-- **Editor approval required**: Only designated editors of the specification can merge PRs
-- **Current editors** (as defined in `CODEOWNERS`):
-    - @nklomp
-    - @samuelmr
-    - @surfnet-niels
-    - @k00ij
-    - @eklaver
-    - @TimoGlastra
+- **Anyone can review**: All community members are encouraged to provide review comments and feedback on Pull Requests
+- **Editor approval required**: Only designated editors (as defined in [CODEOWNERS](CODEOWNERS)) of the specification can merge Pull Requests
 
 ## Ways to Engage
 
@@ -133,7 +127,8 @@ If you have questions about contributing:
 
 1. Check existing [Issues](https://github.com/FIDEScommunity/DIIP/issues)
 2. Start a [Discussion](https://github.com/FIDEScommunity/DIIP/discussions)
-3. Reach out to the editors
+3. Reach out to the editors ([CODEOWNERS](CODEOWNERS))
+4. Join the `#diip` channel in the [OpenWallet Foundation's Discord server](https://discord.gg/openwalletfoundation)
 
 ## License
 
